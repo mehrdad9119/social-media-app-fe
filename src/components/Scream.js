@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import MyButton from '../utils/MyButton';
+import DeleteScream from './DeleteScream'
 
 import { connect } from 'react-redux';
 import { likeScream, unlikeScream } from '../redux/actions/dataActions';
@@ -22,6 +23,7 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 
 const styles = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20
     }, 
@@ -64,7 +66,8 @@ class Scream extends Component {
                     commentCount 
                 },
                 user: {
-                    authenticated
+                    authenticated,
+                    credentials: { handle }
                 }
             } = this.props
 
@@ -85,6 +88,9 @@ class Scream extends Component {
                 </MyButton> 
             )
         )
+        const deleteButton = authenticated && userHandle === handle ? (
+            <DeleteScream screamId={screamId}/>
+        ) : null
         return (
             <Card className={classes.card}>
                 <CardMedia 
@@ -101,6 +107,7 @@ class Scream extends Component {
                     >
                         {userHandle}   
                     </Typography>
+                    {deleteButton}
                     <Typography variant="body2" coloe="textSecondary">
                         {dayjs(createdAt).fromNow()}
                     </Typography>

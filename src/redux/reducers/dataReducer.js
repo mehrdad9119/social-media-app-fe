@@ -46,10 +46,10 @@ import {
           ...state
         };
       case DELETE_SCREAM:
-        index = state.screams.findIndex(
+        let screamIndex = state.screams.findIndex(
           (scream) => scream.screamId === action.payload
         );
-        state.screams.splice(index, 1);
+        state.screams.splice(screamIndex, 1);
         return {
           ...state
         };

@@ -112,6 +112,7 @@ import {
       });
   };
   
+  //delete a scream
   export const deleteScream = (screamId) => (dispatch) => {
     axios
       .delete(`/scream/${screamId}`)
